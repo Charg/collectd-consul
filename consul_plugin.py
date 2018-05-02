@@ -986,7 +986,7 @@ class ConsulAgent(object):
         curr_leader = self.get_dc_leader()
 
         agent_addr = '{0}:{1}'.format(self.config['AdvertiseAddrWAN'],
-                                      self.config['ServerPorts'])
+                                      self.config['ServerPort'])
         if curr_leader == agent_addr:
             if self.last_leader is not None and \
                self.last_leader != curr_leader and \
