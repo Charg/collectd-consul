@@ -936,7 +936,7 @@ class ConsulAgent(object):
         if not conf:
             self.config = None
             return
-        self.config = conf['Config']
+        self.config = conf['DebugConfig']
         self.metrics_enabled = self.check_metrics_endpoint_available()
 
     def check_metrics_endpoint_available(self):
@@ -985,8 +985,8 @@ class ConsulAgent(object):
         '''
         curr_leader = self.get_dc_leader()
 
-        agent_addr = '{0}:{1}'.format(self.config['AdvertiseAddr'],
-                                      self.config['Ports']['Server'])
+        agent_addr = '{0}:{1}'.format(self.config['AdvertiseAddrWAN'],
+                                      self.config['ServerPorts'])
         if curr_leader == agent_addr:
             if self.last_leader is not None and \
                self.last_leader != curr_leader and \
@@ -1151,7 +1151,7 @@ class ConsulAgent(object):
 
         dimensions['datacenter'] = self.config['Datacenter']
         dimensions['consul_node'] = self.config['NodeName']
-        if self.config['Server']:
+        if self.config['ServerMode']:
             dimensions['consul_mode'] = 'server'
         else:
             dimensions['consul_mode'] = 'client'
